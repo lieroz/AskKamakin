@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block right_corner %}
+    {% include "parts/logged_out.html" %}
+{% endblock %}
+
+{% block content %}
+    <h1 style="font-family:Ubuntu Mono;">Sign In</h1>
+    <hr>
+    <h3 style="font-family:Ubuntu Mono; color:red">Sorry, wrong password!</h3>
+    <form class="form-horizontal" style="font-family:Ubuntu Mono; font-size:20px;">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" style="text-align:left;">Login:</label>
+            <div class="col-xs-4">
+                <input class="form-control" placeholder="Type your login here.">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" style="text-align:left;">Password:</label>
+            <div class="col-xs-4">
+                <input class="form-control" placeholder="Type your password here.">
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" style="position:relative; left:150px;">Sign In</button>
+        <button type="button" class="btn btn-primary btn-lg" style="position:relative; left:150px;">Create new account</button>
+    </form>
+{% endblock %}
+
+{% block pagination %}
+{% endblock %}
