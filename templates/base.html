@@ -40,7 +40,6 @@
                     <button type="submit" class="btn btn-default">Ask!</button>
                 </form>
                 {% block right_corner %}
-                {% if user.is_authenticated %}
                     {% include "parts/logged_in.html" %}
                 {% endblock %}
             </div>
