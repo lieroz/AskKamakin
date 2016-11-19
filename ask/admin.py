@@ -1,17 +1,17 @@
 from django.contrib import admin
-from ask.models import Article, Comments
+from ask.models import Question, Comments
 
 # Register your models here.
 
 
-class ArticleInline(admin.StackedInline):
+class QuestionInline(admin.StackedInline):
     model = Comments
     extra = 2
 
 
-class ArticleAdmin(admin.ModelAdmin):
-    fields = ['article_title', 'article_text', 'article_date']
-    inlines = [ArticleInline]
-    list_filter = ['article_date']
+class QuestionAdmin(admin.ModelAdmin):
+    fields = ['question_title', 'question_text', 'question_date']
+    inlines = [QuestionInline]
+    list_filter = ['question_date']
 
-admin.site.register(Article, ArticleAdmin)
+admin.site.register(Question, QuestionAdmin)

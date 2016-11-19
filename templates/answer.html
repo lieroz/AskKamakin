@@ -2,9 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <div class="well" style="height:350px;">
+    <div class="well" style="height:350px; position:relative;">
         <div class="col-md-2">
-            <img src={% static 'img/images.png' %} class="img-thumbnail" width="50" height="50" style="float:right; position:relative; top:20px;">
+            <img src={% static 'img/images.png' %} class="img-thumbnail" width="200" height="200" style="float:right; position:relative; top:20px;">
+            <button type="button" class="btn btn-default btn-sm" style="position:relative; float:left; top:30px;">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-link" style="position:relative; float:left; top:30px;">6</button>
+            <button type="button" class="btn btn-default btn-sm" style="position:relative; float:right; top:30px;">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            </button>
         </div>
         <div class="col-md-10">
             <h1>What is Django?</h1>
@@ -13,13 +20,11 @@
                 Luckily for you, other people long ago noticed that web developers face similar problems when building a new site, so they teamed up and created frameworks (Django being one of them) that give you ready-made components to use.
                 Frameworks exist to save you from having to reinvent the wheel and to help alleviate some of the overhead when you’re building a new site.
             </p>
-            <button type="button" class="btn btn-info" style="position:relative; top:30px;">Like</button>
-            <a style="float:right;" href="#">Answers (3)</a>
-            <div style="text-align:right;">
-                <span style="font-family:Ubuntu Mono; font-size:20px;">Tags:</span>
-                <a href="#">Perl</a>
-                <a href="#">Django</a>
-            </div>
+        </div>
+        <div style="position:absolute; bottom:0; right:0; padding-right: 10px; padding-bottom:10px;">
+            <span style="font-family:Ubuntu Mono; font-size:20px;">Tags:</span>
+            <a href="#">Perl</a>
+            <a href="#">Django</a>
         </div>
     </div>
     <hr>
@@ -27,8 +32,14 @@
     {% for i in "n"|ljust:"3" %}
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <img src={% static 'img/images.png' %} class="img-thumbnail" width="50" height="50" style="float:right; position:relative; top:20px;">
-            <button type="button" class="btn btn-info" style="position:relative; top:80px; left:60px;">Like</button>
+            <img src={% static 'img/images.png' %} class="img-thumbnail" width="200" height="200" style="float:right; position:relative; top:20px;">
+            <button type="button" class="btn btn-default btn-sm" style="position:relative; float:left; top:30px;">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-link" style="position:relative; float:left; top:30px;">6</button>
+            <button type="button" class="btn btn-default btn-sm" style="position:relative; float:right; top:30px;">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            </button>
         </div>
         <div class="col-md-9">
             <h1>What is Django?</h1>

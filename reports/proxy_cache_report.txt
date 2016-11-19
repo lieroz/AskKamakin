@@ -13,33 +13,31 @@ Document Path:          /params
 Document Length:        182 bytes
 
 Concurrency Level:      10
-Time taken for tests:   0.528 seconds
+Time taken for tests:   0.345 seconds
 Complete requests:      10000
 Failed requests:        0
 Non-2xx responses:      10000
 Total transferred:      3430000 bytes
 HTML transferred:       1820000 bytes
-Requests per second:    18950.52 [#/sec] (mean)
-Time per request:       0.528 [ms] (mean)
-Time per request:       0.053 [ms] (mean, across all concurrent requests)
-Transfer rate:          6347.68 [Kbytes/sec] received
+Requests per second:    28994.42 [#/sec] (mean)
+Time per request:       0.345 [ms] (mean)
+Time per request:       0.034 [ms] (mean, across all concurrent requests)
+Transfer rate:          9712.00 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.1      0       3
-Processing:     0    0   0.3      0       5
-Waiting:        0    0   0.3      0       5
-Total:          0    1   0.3      0       5
-ERROR: The median and mean for the total time are more than twice the standard
-       deviation apart. These results are NOT reliable.
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.1      0       1
+Waiting:        0    0   0.1      0       1
+Total:          0    0   0.1      0       1
 
 Percentage of the requests served within a certain time (ms)
   50%      0
   66%      0
-  75%      1
-  80%      1
-  90%      1
-  95%      1
+  75%      0
+  80%      0
+  90%      0
+  95%      0
   98%      1
-  99%      2
- 100%      5 (longest request)
+  99%      1
+ 100%      1 (longest request)

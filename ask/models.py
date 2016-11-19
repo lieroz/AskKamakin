@@ -5,15 +5,15 @@ from django.db import models
 # Create your models here.
 
 
-class Article(models.Model):
+class Question(models.Model):
 
     class Meta:
-        db_table = "article"
+        db_table = "question"
 
-    article_title = models.CharField(max_length=255)
-    article_text = models.TextField()
-    article_date = models.DateTimeField()
-    article_likes = models.IntegerField(default=0)
+    question_title = models.CharField(max_length=255)
+    question_text = models.TextField()
+    question_date = models.DateTimeField()
+    question_likes = models.IntegerField(default=0)
 
 
 class Comments(models.Model):
@@ -22,4 +22,4 @@ class Comments(models.Model):
         db_table = "comments"
 
     comments_text = models.TextField()
-    comments_article = models.ForeignKey(Article)
+    comments_question = models.ForeignKey(Question)
