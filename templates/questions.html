@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    {% for question in questions %}
+    {% for question in objects %}
          <div class="well" style="height:350px; position: relative">
             <div class="col-md-2">
                 <img src={% static 'img/images.png' %} class="img-thumbnail" width="200" height="200" style="float:right; position:relative; top:20px;">
@@ -29,19 +29,7 @@
             </div>
         </div>
     {% endfor %}
-    <div class="pagination", style="position:relative; left:50%">
-    <span class="step-links">
-        {% if questions.has_previous %}
-            <a href="?page={{ questions.previous_page_number }}" class="btn btn-default" style="position:relative;"><<</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
-        </span>
-
-        {% if questions.has_next %}
-            <a href="?page={{ questions.next_page_number }}" class="btn btn-default" style="position:relative;">>></a>
-        {% endif %}
-    </span>
-</div>
+{#    {% block pagination %}#}
+        {% include  'pagination.html' %}
+{#    {% endblock %}#}
 {% endblock %}

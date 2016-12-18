@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ask.models import Question, Comments
+from ask.models import *
 
 # Register your models here.
 
@@ -14,4 +14,6 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
     list_filter = ['question_date']
 
+
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Profile)
