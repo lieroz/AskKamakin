@@ -17,7 +17,6 @@ eggs/
 .eggs/
 lib/
 lib64/
-parts/
 sdist/
 var/
 *.egg-info/
@@ -88,3 +87,15 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+*.iml
+*.conf
+*.sqlite3
+hello.py
+*.sh
+
+migrations/
+reports/
+
+# jetbrains config file for ide
+.idea/
