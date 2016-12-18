@@ -91,6 +91,8 @@ ENV/
 *.iml
 *.conf
 *.sqlite3
+hello.py
+*.sh
 
 migrations/
 reports/
