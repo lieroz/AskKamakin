@@ -7,7 +7,6 @@ import datetime
 import random
 
 
-
 class Comment(models.Model):
     class Meta:
         db_table = "comment"
@@ -15,12 +14,29 @@ class Comment(models.Model):
     comment_author = models.ForeignKey(User)
     comment_body = models.TextField()
     comment_date = models.DateTimeField()
-    comment_is_correct = models.BooleanField(default=False)
     comment_rating = models.IntegerField(default=0)
-    comment_question = models.ForeignKey(Question)
+    comment_answer = models.ForeignKey(Answer)
 
     def get_url(self):
         return self.comment_question.get_url()
+
+
+class Answer(models.Model):
+    class Meta:
+        db_table = "answer"
+
+    answer_author = models.ForeignKey(User)
+    answer_body = models.TextField()
+    answer_date = models.DateTimeField()
+    answer_rating = models.IntegerField(default=0)
+    answer_is_correct = models.BooleanField(default=False)
+    answer_question = models.ForeignKey(Question)
+
+    def get_comments(self):
+        return Comment.objects.filter(comment_answer_id=self.id)
+
+    def get_url(self):
+        return self.answer_question.get_url()
 
 
 class Question(models.Model):
@@ -33,14 +49,11 @@ class Question(models.Model):
     question_rating = models.IntegerField(default=0)
     question_author = models.ForeignKey(User)
 
-    def get_comments(self):
-        return Comment.objects.filter(comment_question_id=self.id)
+    def get_answers(self):
+        return Answer.objects.filter(answer_question_id=self.id)
 
     def get_url(self):
         return '/question{question_id}/'.format(question_id=self.id)
-
-
-class Answer(models.Model):
 
 
 class Tag(models.Model):
