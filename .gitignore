@@ -88,9 +88,9 @@ ENV/
 # Rope project settings
 .ropeproject
 
-.iml
-.conf
-.sqlite3
+*.iml
+*.conf
+*.sqlite3
 
 migrations/
 reports/
