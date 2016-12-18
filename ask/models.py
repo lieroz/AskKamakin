@@ -7,18 +7,21 @@ import datetime
 import random
 
 
-class Comment(models.Model):
+class Question(models.Model):
     class Meta:
-        db_table = "comment"
+        db_table = "question"
 
-    comment_author = models.ForeignKey(User)
-    comment_body = models.TextField()
-    comment_date = models.DateTimeField()
-    comment_rating = models.IntegerField(default=0)
-    comment_answer = models.ForeignKey(Answer)
+    question_title = models.CharField(max_length=30)
+    question_body = models.TextField()
+    question_date = models.DateTimeField()
+    question_rating = models.IntegerField(default=0)
+    question_author = models.ForeignKey(User)
+
+    def get_answers(self):
+        return Answer.objects.filter(answer_question_id=self.id)
 
     def get_url(self):
-        return self.comment_question.get_url()
+        return '/question{question_id}/'.format(question_id=self.id)
 
 
 class Answer(models.Model):
@@ -39,25 +42,29 @@ class Answer(models.Model):
         return self.answer_question.get_url()
 
 
-class Question(models.Model):
+class Comment(models.Model):
     class Meta:
-        db_table = "question"
+        db_table = "comment"
 
-    question_title = models.CharField(max_length=30)
-    question_body = models.TextField()
-    question_date = models.DateTimeField()
-    question_rating = models.IntegerField(default=0)
-    question_author = models.ForeignKey(User)
-
-    def get_answers(self):
-        return Answer.objects.filter(answer_question_id=self.id)
+    comment_author = models.ForeignKey(User)
+    comment_body = models.TextField()
+    comment_date = models.DateTimeField()
+    comment_rating = models.IntegerField(default=0)
+    comment_answer = models.ForeignKey(Answer)
+    comment_likes = models.IntegerField(default=0)
 
     def get_url(self):
-        return '/question{question_id}/'.format(question_id=self.id)
+        return self.comment_question.get_url()
 
 
 class Tag(models.Model):
+    class Meta:
+        db_table = "tag"
 
+    tag_name = models.CharField(max_length=20)
+
+    def get_questions(self):
+        return Question.objects.order_by('tag')
 
 
 class UserProfile(models.Model):
@@ -67,4 +74,8 @@ class UserProfile(models.Model):
 
 
 class Like(models.Model):
+    UP = 1
+    DOWN = -1
+
+    value = models.IntegerField(default=0)
 
