@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav navbar-right">
-    {% url 'sign_in_page' as sign_in_url %}
+    {% url 'sign_in' as sign_in_url %}
     <a type="submit" class="btn btn-default" style="position:relative; top:7px;" href="{{ sign_in_url }}">Sign In</a>
-    {% url 'sign_up_page' as sign_up_url %}
+    {% url 'sign_up' as sign_up_url %}
     <a type="submit" class="btn btn-default" style="position:relative; top:7px;" href="{{ sign_up_url }}">Sign Up</a>
 </ul>

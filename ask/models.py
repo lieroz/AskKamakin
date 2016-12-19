@@ -21,6 +21,7 @@ class Question(models.Model):
     question_rating = models.IntegerField(default=0)
     question_author = models.ForeignKey(User)
     question_likes = models.IntegerField(default=0)
+    question_image = models.ImageField(upload_to="avatars/%Y/%m/%d")
 
     questions = QuestionManager()
 

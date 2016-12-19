@@ -16,8 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from ask import views as ask_views
+
 urlpatterns = [
-    url(r'^', include('ask.urls')),
+    url(r'^login/?', ask_views.login, name='login'),
+    url(r'^sign_up/?', ask_views.sign_up, name='sign_up'),
+    # url(r'^question(?P<question_id>\d+)/', ask_views.question, name='question'),
+    # url(r'^questions(?P<page>\d+)/', ask_views.question_page),
+    url(r'^ask/?', ask_views.ask_page, name='ask_page'),
+    url(r'^answer/?', ask_views.answer_page, name='answer_page'),
+    url(r'^settings/?', ask_views.settings_page, name='settings_page'),
+    url(r'^logout/?', ask_views.logout, name='logout'),
+    url(r'^$', ask_views.main_page, name='main_page'),
     url(r'^admin/', admin.site.urls),
 ]
 

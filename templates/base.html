@@ -23,36 +23,27 @@
 <body>
     <nav class="navbar navbar-default navbar-inverse">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                {% url 'main_page' as main_url %}
-                <a class="navbar-brand" href="{{ main_url }}">AskKamakin</a>
+{#            <div class="navbar-header">#}
+{#                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">#}
+{#                    <span class="sr-only">Toggle navigation</span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                </button>#}
+{#                {% url 'main_page' as main_url %}#}
+{#                <a class="navbar-brand" href="{{ main_url }}">AskKamakin</a>#}
+{#            </div>#}
+            <div>
+                <a class="navbar-brand" href="/">Ask Kamakin!</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    {% url 'ask_page' as ask_url %}
-                    <a type="submit" class="btn btn-default" href="{{ ask_url }}">Ask!</a>
-                </form>
+            <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    {% block right_corner %}
-                        {% include 'parts/logged_in.html' %}
-                        {% if user.is_superuser %}
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/admin">Admin panel</a></li>
-                        {% endif %}
-                    {% endblock %}
+                    <li><a href="{% url 'logout' %}">logout</a></li>
                 {% else %}
-                    {% include 'parts/logged_out.html' %}
+                    <li><a href="{% url 'login' %}">login</a></li>
+                    <li><a href="{% url 'sign_up' %}">sign up</a></li>
                 {% endif %}
-            </div>
+            </ul>
         </div>
     </nav>
 

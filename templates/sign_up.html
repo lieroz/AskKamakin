@@ -1,69 +1,14 @@
 {% extends "base.html" %}
 
-{#{% block right_corner %}#}
-{#    {% include "parts/logged_out.html" %}#}
-{#{% endblock %}#}
-
 {% block content %}
-    <form method="POST" action="sign_up.html">
+    <form method="POST" action="/sign_up/">
         {% csrf_token %}
         {% for f in form.visible_fields %}
         <div class="form-group">
             <label for="{{ f.name }}">{{ f.label }}</label>
             {{ f }}
-{#            <input type="text" class="form-control" name="{{ f.name }}" id="id_{{ f.name }}" placeholder="Username">#}
         </div>
         {% endfor %}
     <button type="submit" class="btn btn-default">Submit</button>
     </form>
-{#    <h1 style="font-family:Ubuntu Mono;">Sign Up</h1>#}
-{#    <hr>#}
-{#    <h3 style="font-family:Ubuntu Mono; color:red">Sorry, this email address already registered!</h3>#}
-{#    <form class="form-horizontal" style="font-family:Ubuntu Mono; font-size:20px;">#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">Login:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <input class="form-control" placeholder="dr_spencer">#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">Email:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <input class="form-control" placeholder="example@example.com">#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">NickName:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <input class="form-control" placeholder="majanezz">#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">Password:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <input class="form-control" placeholder="************">#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">Repeat Password:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <input class="form-control" placeholder="************">#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="form-group">#}
-{#            <label class="col-sm-3 control-label" style="text-align:left;">Upload Avatar:</label>#}
-{#            <div class="col-xs-4">#}
-{#                <select class="form-control">#}
-{#                    <option value="one">images.png</option>#}
-{#                    <option value="two">smth.png</option>#}
-{#                    <option value="three">avatar.png</option>#}
-{#                </select>#}
-{#            </div>#}
-{#            <button type="button" class="btn btn-default">Choose</button>#}
-{#        </div>#}
-{#        <button type="button" class="btn btn-primary btn-lg" style="position:relative; left:220px;">Sign Up</button>#}
-{#    </form>#}
-{% endblock %}
-
-{% block pagination %}
 {% endblock %}
