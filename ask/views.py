@@ -41,7 +41,7 @@ def sign_in_page(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-    return render_to_response('sign_in.html')
+    return render(request, 'sign_in.html')
 
 
 def sign_up_page(request):
@@ -53,7 +53,9 @@ def sign_up_page(request):
                 password=form.cleaned_data['password'],
                 email=form.cleaned_data['email']
             )
-        return redirect('/')
+            return redirect('/')
+        else:
+            return render(request, 'sign_up.html', {'form': form})
     else:
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
