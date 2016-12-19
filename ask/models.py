@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
-from django.db.models import Count, Sum
-from django.core.urlresolvers import reverse
-import datetime
-import random
+
+
+class QuestionManager(models.Manager):
+    def list_new(self):
+        return self.order_by('-question_date')
+
+    def list_popular(self):
+        return self.order_by('-question_likes')
 
 
 class Question(models.Model):
@@ -16,6 +19,9 @@ class Question(models.Model):
     question_date = models.DateTimeField()
     question_rating = models.IntegerField(default=0)
     question_author = models.ForeignKey(User)
+    question_likes = models.IntegerField(default=0)
+
+    questions = QuestionManager()
 
     def get_answers(self):
         return Answer.objects.filter(answer_question_id=self.id)
@@ -64,7 +70,7 @@ class Tag(models.Model):
     tag_name = models.CharField(max_length=20)
 
     def get_questions(self):
-        return Question.objects.order_by('tag')
+        return Question.filter('tag')
 
 
 class UserProfile(models.Model):
@@ -74,6 +80,9 @@ class UserProfile(models.Model):
 
 
 class Like(models.Model):
+    class Meta:
+        db_table = "like"
+
     UP = 1
     DOWN = -1
 
