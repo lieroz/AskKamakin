@@ -8,7 +8,8 @@
     <h1 style="font-family:Ubuntu Mono;">Sign In</h1>
     <hr>
     <h3 style="font-family:Ubuntu Mono; color:red">Sorry, wrong password!</h3>
-    <form class="form-horizontal" style="font-family:Ubuntu Mono; font-size:20px;">
+    <form method="POST" action="sign_in.html" class="form-horizontal" style="font-family:Ubuntu Mono; font-size:20px;">
+        {% csrf_token %}
         <div class="form-group">
             <label class="col-sm-2 control-label" style="text-align:left;">Login:</label>
             <div class="col-xs-4">
