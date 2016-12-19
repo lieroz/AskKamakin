@@ -2,9 +2,24 @@ from django.shortcuts import render_to_response, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import auth
 from django.contrib.auth.models import User
-from ask.forms import SignUpForm, SignInForm
+from ask.forms import SignUpForm, SignInForm, UploadFileForm
+from ask.models import Question
+from django.http import HttpResponseRedirect
 
 # Create your views here.
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            instance = Question(question_files=request.FILES['file'])
+            instance.save()
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})
+
 
 questions = []
 for i in xrange(1, 30):

@@ -21,6 +21,7 @@ from ask import views as ask_views
 urlpatterns = [
     url(r'^login/?', ask_views.login, name='login'),
     url(r'^sign_up/?', ask_views.sign_up, name='sign_up'),
+    url(r'^upload/?', ask_views.upload_file, name='upload'),
     # url(r'^question(?P<question_id>\d+)/', ask_views.question, name='question'),
     # url(r'^questions(?P<page>\d+)/', ask_views.question_page),
     url(r'^ask/?', ask_views.ask_page, name='ask_page'),

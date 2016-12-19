@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from PIL import Image
 
 
 class QuestionManager(models.Manager):
@@ -21,7 +22,7 @@ class Question(models.Model):
     question_rating = models.IntegerField(default=0)
     question_author = models.ForeignKey(User)
     question_likes = models.IntegerField(default=0)
-    question_image = models.ImageField(upload_to="avatars/%Y/%m/%d")
+    question_files = models.FileField(upload_to="files")
 
     questions = QuestionManager()
 

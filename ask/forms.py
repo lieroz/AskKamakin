@@ -18,3 +18,7 @@ class SignInForm(forms.Form):
     password = forms.CharField(label="Password", max_length=50,
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()
