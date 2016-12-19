@@ -1,5 +1,8 @@
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from ask.forms import SignUpForm
 
 # Create your views here.
 
@@ -31,11 +34,29 @@ def main_page(request):
 
 
 def sign_in_page(request):
+    if request.POST:
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
     return render_to_response('sign_in.html')
 
 
 def sign_up_page(request):
-    return render_to_response('sign_up.html')
+    if request.method == 'POST':
+        form = SignUpForm()
+        if form.is_valid():
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email']
+            )
+        return redirect('/')
+    else:
+        form = SignUpForm()
+    return render(request, 'sign_up.html', {'form': form})
 
 
 def ask_page(request):
