@@ -27,5 +27,4 @@ class AnswerAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
-admin.site.register(Tag)
-admin.site.register(Like)
+admin.site.register(QuestionLike)
