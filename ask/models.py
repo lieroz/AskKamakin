@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 
 class QuestionManager(models.Manager):
@@ -70,7 +71,7 @@ class Tag(models.Model):
     tag_name = models.CharField(max_length=20)
 
     def get_questions(self):
-        return Question.filter('tag')
+        return Question.filter('tag_name')
 
 
 class UserProfile(models.Model):
@@ -79,12 +80,35 @@ class UserProfile(models.Model):
     info = models.TextField()
 
 
-class Like(models.Model):
+class QuestionLikeManager(models.Model):
+    def get_likes(self, question):
+        return self.filter(question=question)
+
+    def get_likes_sum(self, question):
+        return self.get_likes(question).aggregate(sum=Sum('value'))['sum']
+
+    def add_or_update(self, author, question, value):
+        new = self.update_or_create(
+            question_like_author=author,
+            question_line_answer=question,
+            defaults={'value': value}
+        )
+
+        question.likes = self.get_likes_sum(question)
+        question.save()
+        return new
+
+
+class QuestionLike(models.Model):
     class Meta:
-        db_table = "like"
+        db_table = "question_like"
 
     UP = 1
     DOWN = -1
 
-    value = models.IntegerField(default=0)
+    question_like_answer = models.ForeignKey(Question)
+    question_like_author = models.ForeignKey(User)
+    question_like_value = models.IntegerField(default=0)
+
+    objects = QuestionLikeManager()
 
