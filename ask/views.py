@@ -68,7 +68,7 @@ def question(request, question_id):
     except Question.DoesNotExist:
         raise Http404()
 
-    return render(request, 'question.html', {'question': ques})
+    return render(request, 'template_form.html', {'question': ques})
 
 
 @login_required
@@ -94,7 +94,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {
+    return render(request, 'template_form.html', {
         'form': form
     })
 
@@ -114,7 +114,7 @@ def signup(request):
     else:
         form = SignupForm()
 
-    return render(request, 'signup.html', {
+    return render(request, 'template_form.html', {
         'form': form,
     })
 
@@ -125,7 +125,7 @@ def main_page(request):
 
 
 def ask(request):
-    return render(request, 'ask.html')
+    return render(request, 'template_form.html')
 
 
 def settings(request):
@@ -141,6 +141,6 @@ def settings(request):
     else:
         form = SettingsForm(request.user)
 
-    return render(request, 'settings.html', {
+    return render(request, 'template_form.html', {
         'form': form,
     })

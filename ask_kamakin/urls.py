@@ -13,23 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url
 from django.contrib import admin
-
-from ask import views as ask_views
+from django.conf import settings
+from django.conf.urls.static import static
+from ask import views
 
 urlpatterns = [
-    url(r'^login/?', ask_views.login, name='login'),
-    url(r'^sign_up/?', ask_views.sign_up, name='sign_up'),
-    url(r'^upload/?', ask_views.upload_file, name='upload'),
-    # url(r'^question(?P<question_id>\d+)/', ask_views.question, name='question'),
-    # url(r'^questions(?P<page>\d+)/', ask_views.question_page),
-    url(r'^ask/?', ask_views.ask_page, name='ask_page'),
-    url(r'^answer/?', ask_views.answer_page, name='answer_page'),
-    url(r'^settings/?', ask_views.settings_page, name='settings_page'),
-    url(r'^logout/?', ask_views.logout, name='logout'),
-    url(r'^$', ask_views.main_page, name='main_page'),
     url(r'^admin/', admin.site.urls),
-]
+    # url(r'^hot/?', views.hot, name='hot'),
+    # url(r'^ask/?', views.ask, name='ask_page'),
+    url(r'^settings/?', views.settings, name='settings'),
+    url(r'^$', views.main_page, name='main_page'),
+    url(r'^login/?', views.login, name='login'),
+    url(r'^logout/?', views.logout, name='logout'),
+    url(r'^signup/?', views.signup, name='signup'),
+    url(r'^(/)?(?P<page>\d+)?$', views.new, name='/'),
+    # url(r'^question/(?P<question_id>[0-9]+)?/?$', views.question, name='question'),
+    # url(r'^tag/(?P<htag>[a-zA-Z0-9+#]+)/(?P<page>[0-9]+)?/?$'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

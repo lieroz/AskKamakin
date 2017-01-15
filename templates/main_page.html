@@ -3,13 +3,15 @@
 
 {% block content %}
     {% for question in objects %}
-         <div class="well" style="height:350px; position: relative">
+        <div class="well" style="height:350px; position: relative">
             <div class="col-md-2">
-                <img src={% static 'img/images.png' %} class="img-thumbnail" width="200" height="200" style="float:right; position:relative; top:20px;">
+                <img src={% static 'img/images.png' %} class="img-thumbnail" width="200" height="200"
+                     style="float:right; position:relative; top:20px;">
                 <button type="button" class="btn btn-default btn-sm" style="position:relative; float:left; top:30px;">
                     <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-link" style="position:relative; float:left; top:30px;">{{ question.likes }}</button>
+                <button type="button" class="btn btn-link"
+                        style="position:relative; float:left; top:30px;">{{ question.likes }}</button>
                 <button type="button" class="btn btn-default btn-sm" style="position:relative; float:right; top:30px;">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 </button>
