@@ -214,6 +214,12 @@ class QuestionForm(forms.Form):
         ),
         label='Text',
     )
+    tags = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'class': 'form-control input-lg', }
+        ),
+        label='Tags',
+    )
 
     def __init__(self, user=None, *args, **kwargs):
         self.user = user
@@ -226,6 +232,14 @@ class QuestionForm(forms.Form):
         except Question.DoesNotExist:
             return self.cleaned_data['title']
 
+    def clean_tags(self):
+        if 'tags' in self.cleaned_data:
+
+            if self.cleaned_data['tags'].count(',') > 2:
+                raise forms.ValidationError('Can\'t be more than 3 tags!!!')
+
+            return self.cleaned_data['tags']
+
     def save(self):
         question = Question()
 
@@ -236,6 +250,14 @@ class QuestionForm(forms.Form):
         question.likes = 0
 
         question.save()
+
+        if 'tags' in self.cleaned_data:
+
+            for tag in self.cleaned_data['tags'].split(','):
+
+                if len(tag):
+                    create = Tag.objects.get_or_create(tag.strip())
+                    question.tags.add(create)
 
         return question
 
@@ -277,3 +299,5 @@ class AnswerForm(forms.Form):
         answer.likes = 0
 
         answer.save()
+
+        return answer

@@ -35,13 +35,10 @@ class TagManager(models.Manager):
         return tag
 
     # Counts popular questions in range
-    def count_popular(self, amount):
+    def count_popular(self):
         questions_count = Count('question')
 
-        if amount > questions_count:
-            amount = questions_count
-
-        return self.order_by_question_count().all()[:questions_count]
+        return self.order_by_question_count().all()[:10]
 
 
 # Describes Tag model
@@ -51,7 +48,7 @@ class Tag(models.Model):
     title = models.CharField(max_length=20)
 
     def get_url(self):
-        return reverse(kwargs={'tag': self.title})
+        return '/tag/' + self.title + '/1/'
 
 
 # Manages question methods and logic
@@ -83,6 +80,9 @@ class Question(models.Model):
     class Meta:
         db_table = 'question'
         ordering = ['-date']
+
+    def get_answers(self):
+        return Answer.objects.filter(question_id=self.id)
 
     def get_url(self):
         return '/question/{question_id}/'.format(question_id=self.id)
