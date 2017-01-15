@@ -26,6 +26,6 @@ urlpatterns = [
                   url(r'^logout/?', views.logout, name='logout'),
                   url(r'^settings/?', views.settings, name='settings'),
                   url(r'^ask/?', views.question_add_form, name='ask'),
-                  url(r'^question/(?P<question_id>\d+)/?', views.question_view),
+                  url(r'^question/(?P<question_id>\d+)/?', views.single_question, name='single_question'),
                   url(r'^$', views.main_page, name='main_page'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
