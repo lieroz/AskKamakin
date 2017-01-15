@@ -9,7 +9,7 @@
                 <button type="button" class="btn btn-default btn-sm" style="position:relative; float:left; top:30px;">
                     <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-link" style="position:relative; float:left; top:30px;">6</button>
+                <button type="button" class="btn btn-link" style="position:relative; float:left; top:30px;">{{ question.likes }}</button>
                 <button type="button" class="btn btn-default btn-sm" style="position:relative; float:right; top:30px;">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 </button>
@@ -29,7 +29,5 @@
             </div>
         </div>
     {% endfor %}
-{#    {% block pagination %}#}
-        {% include  'pagination.html' %}
-{#    {% endblock %}#}
+    {% include  'pagination.html' %}
 {% endblock %}
