@@ -18,12 +18,12 @@ class Command(BaseCommand):
         parser.add_argument('--max-number',
                             action='store',
                             dest='max_number',
-                            default=15,
+                            default=8,
                             help='Max number of answers for a question'
                             )
 
     def handle(self, *args, **options):
-        fake_factory = Factory.create()
+        fake_factory = Factory.create('en_US')
 
         min_number = int(options['min_number'])
         max_number = int(options['max_number'])

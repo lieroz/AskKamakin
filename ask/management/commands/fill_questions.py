@@ -24,8 +24,8 @@ class Command(BaseCommand):
         for i in range(number):
             question = Question()
 
-            question.title = fake_factory.sentence(nb_words=randint(4, 6), variable_nb_words=True)
-            question.text = fake_factory.text(max_nb_chars=1000)
+            question.title = fake_factory.sentence(nb_words=randint(2, 4), variable_nb_words=True)
+            question.text = fake_factory.text(max_nb_chars=500)
             question.author = choice(users)
             question.date = fake_factory.date()
             question.save()
