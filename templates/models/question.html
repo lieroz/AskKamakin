@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="well" style="height:350px; position: relative">
+    <div class="col-md-2">
+        <div class="col-xs-3 col-sm-3" style="padding:0px; width:auto; padding-top:16px">
+            <div><a style="font-size: 26px; color:grey" href="#" class="glyphicon glyphicon-triangle-top"></a>
+            </div>
+            <div align=center style="font-size: 16px; color:grey">{% block likes %}
+                {{ question.likes }} {% endblock %}</div>
+            <div><a style="font-size: 26px; color:grey" href="#"
+                    class="glyphicon glyphicon-triangle-bottom"></a></div>
+        </div>
+        <img src={% static 'img/images.png' %} class="img-thumbnail" width="74" height="74"
+             style="float:right; position:relative; top:20px;">
+    </div>
+    <div class="col-md-10">
+        <h1>{{ question.title }}</h1>
+        <p>{{ question.text }}</p>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; padding-left: 25px; padding-bottom:25px;">
+        <label class="glyphicon glyphicon-pencil"></label>
+        <label>
+            Answers: {{ question.get_answers|length }}
+        </label>
+    </div>
+    <div class="col-xs-12" align="right">
+        <label><a class="glyphicon glyphicon-user col-xs-4" href="#"
+                  style="font-size:15px">{{ question.author }}</a></label>
+    </div>
+    <div class="col-xs-12" align="right">
+        <label class="glyphicon glyphicon-calendar"></label>
+        <label>
+            {{ question.date }}
+        </label>
+    </div>
+    <div class="col-xs-12" align="right">
+        {% for tag in question.tags.all %}
+            <a href="{{ tag.get_url }}" class="label label-info btn-inverse" role="button"
+               style="background: {{ tag.get_color }}">{{ tag.title }}</a>
+        {% endfor %}
+    </div>
+</div>

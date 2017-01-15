@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% include "models/question.html" %}
+    {% for answer in question.get_answers %}
+        {% include "models/answer.html" %}
+    {% endfor %}
+    {% if user.is_authenticated and question.author_id != user.id %}
+        {% include 'forms/answer_form.html' %}
+    {% endif %}
+{% endblock %}
