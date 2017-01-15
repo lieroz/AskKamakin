@@ -1,6 +1,6 @@
+from datetime import datetime
 from django import forms
 from django.contrib.auth import authenticate
-
 from .models import *
 
 
@@ -199,47 +199,81 @@ class SettingsForm(forms.Form):
         self.user.save()
 
 
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = ['title', 'text', 'tags', ]
+class QuestionForm(forms.Form):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'class': 'form-control input-lg', }
+        ),
+        min_length=3,
+        max_length=100,
+        label='Title',
+    )
+    text = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'class': 'form-control input-lg', }
+        ),
+        label='Text',
+    )
 
-    def __init__(self, current_user, *args, **kwargs):
-        super(QuestionForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class': 'form-control'
-        })
-        self.fields['text'].widget.attrs.update({
-            'class': 'form-control askme-textarea',
-            'rows': 5,
-        })
-        self.fields['tags'].widget.attrs.update({
-            'class': 'form-control'
-        })
-        self.current_user = current_user
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
+        forms.Form.__init__(self, *args, **kwargs)
 
-    def save(self, commit=True):
-        question = super(QuestionForm, self).save(commit=False)
-        question.user = self.current_user
+    def clean_title(self):
+        try:
+            question = Question.objects.get(title=self.cleaned_data['title'])
+            raise forms.ValidationError('Title is already in use!!!')
+        except Question.DoesNotExist:
+            return self.cleaned_data['title']
 
-        if commit:
-            question.save()
+    def save(self):
+        question = Question()
 
-        return question.id
+        question.title = self.cleaned_data['title']
+        question.text = self.cleaned_data['text']
+        question.author = self.user
+        question.date = datetime.now()
+        question.likes = 0
 
-
-class AskForm(forms.Form):
-    title = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control input-lg',
-        'placeholder': 'Enter question title...'
-    }))
-    text = forms.CharField(widget=forms.Textarea(attrs={
-        'class': 'form-control input-lg',
-        'placeholder': 'Enter question context...',
-        'rows': 20,
-    }))
-
-    def save(self, user_id):
-        data = self.cleaned_data
-        question = Question(title=data['title'], text=data['text'], author_id=user_id)
         question.save()
+
+        return question
+
+
+class AnswerForm(forms.Form):
+    text = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'class': 'form-control input-lg', }
+        ),
+        label='Text',
+    )
+    question_id = forms.IntegerField(
+        widget=forms.HiddenInput(),
+    )
+
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
+        forms.Form.__init__(self, *args, **kwargs)
+
+    def clean_text(self):
+        if not self.cleaned_data['text'] or not len(self.cleaned_data['text']):
+            raise forms.ValidationError('This field is required!!!')
+
+        return self.cleaned_data['text']
+
+    def clean_question(self):
+        if Question.objects.get(id=self.cleaned_data['question_id']):
+            return self.cleaned_data['question_id']
+
+        raise forms.ValidationError('Question does\'t exist!!!')
+
+    def save(self):
+        answer = Answer()
+
+        answer.text = self.cleaned_data['text']
+        answer.question_id = self.cleaned_data['question_id']
+        answer.author = self.user
+        answer.date = datetime.now()
+        answer.likes = 0
+
+        answer.save()

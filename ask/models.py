@@ -85,7 +85,7 @@ class Question(models.Model):
         ordering = ['-date']
 
     def get_url(self):
-        return reverse('question', kwargs={'id': self.id})
+        return '/question/{question_id}/'.format(question_id=self.id)
 
 
 # Manages likes for a question
@@ -132,6 +132,9 @@ class Answer(models.Model):
     class Meta:
         db_table = 'answer'
         ordering = ['-correct', 'date', '-likes']
+
+    def get_url(self):
+        return self.question.get_url()
 
 
 # Manages likes for an answer

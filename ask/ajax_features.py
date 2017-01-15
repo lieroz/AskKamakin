@@ -20,3 +20,16 @@ class HttpResponseAjaxError(HttpResponseAjax):
             code=code,
             message=message,
         )
+
+
+def login_required_ajax(func):
+    def check(request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return func(request, *args, **kwargs)
+
+        return HttpResponseAjaxError(
+            code='no_auth',
+            message='Need auth'
+        )
+
+    return check
