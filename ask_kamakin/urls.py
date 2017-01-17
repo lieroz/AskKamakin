@@ -13,20 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url
+from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from ask import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^sign_in/', views.sign_in_page, name='sign_in_page'),
-    url(r'^sign_up/', views.sign_up_page, name='sign_up_page'),
-    url(r'^ask/', views.ask_page, name='ask_page'),
-    url(r'^answer/', views.answer_page, name='answer_page'),
-    url(r'^settings/', views.settings_page, name='settings_page'),
-    url(r'^$', views.main_page, name='main_page'),
-]
-
-
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^login/?', views.login, name='login'),
+                  url(r'^signup/?', views.signup, name='signup'),
+                  url(r'^logout/?', views.logout, name='logout'),
+                  url(r'^settings/?', views.settings, name='settings'),
+                  url(r'^ask/?', views.question_add_form, name='ask'),
+                  url(r'^question/(?P<question_id>\d+)/?', views.single_question, name='single_question'),
+                  url(r'^$', views.main_page, name='main_page'),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

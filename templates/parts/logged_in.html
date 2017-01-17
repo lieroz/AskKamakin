@@ -3,13 +3,17 @@
 <ul class="nav navbar-nav navbar-right">
     <img src={% static 'img/images.png' %} class="img-circle" width="50" height="50" style="float:left;">
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dr. Spencer<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+           aria-expanded="false" style="font-family:Ubuntu Mono; font-size:20px;">{{ user.username }}<span
+                class="caret"></span></a>
         <ul class="dropdown-menu">
-            {% url 'settings_page' as settings_url %}
-            <li><a href="{{ settings_url }}">Settings</a></li>
+            {% if user.is_superuser %}
+                <li><a href="/admin">Admin</a></li>
+            {% endif %}
+            <li><a href="{% url 'settings' %}">Settings</a></li>
             <li><a href="#">Messages</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Log Out</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
         </ul>
     </li>
 </ul>
