@@ -10,6 +10,9 @@
             {{ f }}
         </div>
     {% endfor %}
+    {% for f in form.hidden_fields %}
+        {{ f }}
+    {% endfor %}
     <div class="form-actions ">
         <button type="submit" class="btn btn-success col-xs-offset-4 col-sm-offset-5 col-xs-4">Submit</button>
     </div>

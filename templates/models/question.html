@@ -35,7 +35,7 @@
     </div>
     <div class="col-xs-12" align="right">
         {% for tag in question.tags.all %}
-            <a href="{{ tag.get_url }}" class="label label-info btn-inverse" role="button"
+            <a href="{{ tag.get_url }}" class="label label-info" role="button"
                style="background: {{ tag.get_color }}">{{ tag.title }}</a>
         {% endfor %}
     </div>

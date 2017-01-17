@@ -44,6 +44,7 @@ class SignupForm(forms.Form):
         label='Login',
     )
     first_name = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={'class': 'form-control input-lg', 'placeholder': 'Enter your first name...'}
         ),
@@ -51,6 +52,7 @@ class SignupForm(forms.Form):
         label='First name',
     )
     last_name = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={'class': 'form-control input-lg', 'placeholder': 'Enter your last name login...'}
         ),

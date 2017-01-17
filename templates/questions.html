@@ -19,15 +19,27 @@
                 <h1>{{ question.title }}</h1>
                 <p>{{ question.text }}</p>
             </div>
-            <div align="right">
+            <div style="position:absolute; bottom:0; left:0; padding-left: 25px; padding-bottom:25px;">
+                <label class="glyphicon glyphicon-pencil"></label>
+                <label>
+                    Answers: {{ question.get_answers|length }}
+                </label>
+            </div>
+            <div class="col-xs-12" align="right">
+                <label><a class="glyphicon glyphicon-user col-xs-4" href="#"
+                          style="font-size:15px">{{ question.author }}</a></label>
+            </div>
+            <div class="col-xs-12" align="right">
+                <label class="glyphicon glyphicon-calendar"></label>
+                <label>
+                    {{ question.date }}
+                </label>
+            </div>
+            <div class="col-xs-12" align="right">
                 {% for tag in question.tags.all %}
-                    <a href="{{ tag.get_url }}" class="label label-info btn-inverse" role="button"
+                    <a href="{{ tag.get_url }}" class="label label-info" role="button"
                        style="background: {{ tag.get_color }}">{{ tag.title }}</a>
                 {% endfor %}
-            </div>
-            <div style="position:absolute; bottom:0; left:0; padding-left: 25px; padding-bottom:25px;">
-                {% url 'answer_page' as answer_url %}
-                <a href="{{ answer_url }}">Answers {{ question.get_answers|length }}</a>
             </div>
         </div>
     {% endfor %}
